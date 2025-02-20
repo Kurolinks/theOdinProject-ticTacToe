@@ -1,3 +1,25 @@
+const xmarker = document.querySelector(".xmarker");
+const ymarker = document.querySelector(".ymarker");
+const topLeft = document.querySelector("top left");
+const topCenter = document.querySelector(".top center");
+const topRight = document.querySelector(".top right");
+const middleLeft = document.querySelector(".middle left");
+const middleCenter = document.querySelector(".middle center");
+middleRight = document.querySelector(".middle right");
+const bottomLeft = document.querySelector(".bottom left");
+const bottomCenter = document.querySelector(".bottom center");
+const bottomRigth = document.querySelector(".bottom right");
+
+xmarker.addEventListener("click", addx());
+xmarker.addEventListener("click", addx());
+
+function addx() {
+
+}
+
+function addy() {
+
+}
 // // Gameboard object
 // let gameBoard = {
 //     // let board = [];
