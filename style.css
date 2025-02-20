@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+h1, h2 {
+    margin: auto;
+    text-align: center;
+    width: 50%;
+}
+
+.grid {
+    background-color: rgb(178, 216, 223);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 250px;
+    margin: auto;
+    margin-top: 10%;
+    width: 250px;
+}
+
+.grid div {
+    border: 1px solid white;
+    color: brown;
+    font-size: 50px;
+}
+
+.controls {
+    margin-left: 20%;
+    margin-top: 2rem;
+}
+
+button {
+    background-color: blue;
+    border: 1px solid white;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    height: 50px;
+    margin-left: 1rem;
+
+    width: 12rem;
+}

@@ -31,7 +31,8 @@
 
 let board = [];
 let counter = "-";
-let markerChoice;
+let markerChoice = "-";
+let option;
 
 for (let i = 0; i < 3; i++) {
 board[i] = [];
@@ -45,10 +46,13 @@ var computer;
 
 // Function for Player
 function playerTurn() {
-    markerChoice = prompt('Pick a Marker: X or O');
+    
+    if (markerChoice === "-") {
+        markerChoice = prompt('Pick a Marker: X or O').toLowerCase();
+    }
     let firstIndex = parseInt(prompt("Pick a number from 0 to 2 to select the Row"), 10);
     let secondIndex = parseInt(prompt("Pick a number from 0 to 2 to select the Column"), 10);
-
+    
     if ((markerChoice === "o")) {
         if (board[firstIndex][secondIndex] === "-") {
             board[firstIndex][secondIndex] = markerChoice;
@@ -67,11 +71,14 @@ function playerTurn() {
             playerTurn();
         }
     }
+    else {
+        alert("Wrong input, try again.")
+        playerTurn();
+    }
 }
 
 // Function for Computer 
 function computerTurn() {
-    let option;
     // create random number from 0 to 2
     let compSecondIndex = Math.floor(Math.random() * 3);
     let compFirstIndex = Math.floor(Math.random() * 3);
@@ -87,14 +94,6 @@ function computerTurn() {
         board[compFirstIndex][compSecondIndex] = computerChoice;
     }
 
-    // foremer code
-        // if (board[compFirstIndex][compSecondIndex] === "-") {
-        //     board[compFirstIndex][compSecondIndex] = computerChoice;
-        // }else {
-        //     alert("You can't place a marker here, Play Again!");
-        //     computerTurn();
-        // }
-    // }
     else if (markerChoice === "o") {
         option = "x";   
 
@@ -106,67 +105,119 @@ function computerTurn() {
                 }
         
                 board[compFirstIndex][compSecondIndex] = computerChoice;
-            }
-
-        // former code
-        // if (board[compFirstIndex][compSecondIndex] === "-") {
-        //     board[compFirstIndex][compSecondIndex] = computerChoice;
-        // }else {
-        //     alert("You can't place a marker here, Play Again!");
-        //     computerTurn();
-        // }
-    // }
+    }
 }
 
 // Condition for winning
 function winningCondition() {
+    let winner;
     if ((board[0][0] !== "-") && (board[0][0] === board[0][1]) && (board[0][1] === board[0][2])) {
-        console.log("Game Over! 1");
+        if (board[0][0] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log("Game Over! 1 " + winner + " wins");
     }
     else if ((board[1][0] !== "-") && (board[1][0] === board[1][1]) && (board[1][1] === board[1][2])) {
-        console.log("Game Over! 2");
+        if (board[1][0] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 2 ' + winner + ' wins');
     }
     else if ((board[2][0] !== "-") &&(board[2][0] === board[2][1]) && (board[2][1] === board[2][2])) {
-        console.log("Game Over! 3");
+        if (board[2][0] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 3 ' + winner + ' wins');
     }
     else if ((board[0][0] !== "-") && (board[0][0] === board[1][0]) && (board[1][0] === board[2][0])) {
-        console.log("Game Over! 4");
+        if (board[0][0] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 4 ' + winner + ' wins');
     }
     else if ((board[0][1] !== "-") && (board[0][1] === board[1][1]) && (board[1][1] === board[2][1])) {
-        console.log("Game Over! 5");
+        if (board[0][1] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 5 ' + winner + ' wins');
     }
     else if ((board[0][2] !== "-") &&(board[0][2] === board[1][2]) && (board[1][2] === board[2][2])) {
-        console.log("Game Over! 6");
+        if (board[0][2] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 6' + winner + ' wins');
     }
     else if ((board[0][0] !== "-") && (board[0][0] === board[1][1]) && (board[1][1] === board[2][2])) {
-        console.log("Game Over! 7");
+        if (board[0][0] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 7 ' + winner + ' wins');
     }
     else if ((board[0][2] !== "-") &&(board[0][2] === board[1][1]) && (board[1][1] === board[2][0])) {
-        console.log("Game Over! 8");
+        if (board[0][2] === markerChoice) {
+            winner = "Player";
+        }
+        else {
+            winner = "Computer";
+        }
+        play = false;
+        console.log('Game Over! 8 ' + winner + ' wins');
     }
     else {
-        // for(let i = 0; i < 3; i++){
-        //     for(let j = 0; j < 3; j++) {
-        //         if ((board[i][j] !== "o") || (board[i][j] !== "x")){
-        //         }
-        //     }
-        // }
-        playerTurn();
-        alert(board);
-        computerTurn();
-        alert(board);
-        winningCondition();
-        console.log(board);
+        // console.log("There is no Winner! Try again.");
     }
 }
 
-winningCondition();
+
+let play = true;
+
+// while(play) {
+//     playGame();
+// }
+
+function playGame() {
+    playerTurn();
+    alert(board);
+    winningCondition();
+    computerTurn();
+    alert(board);
+    winningCondition();
+    console.log(board);
+}
 
 
 
 // Todo list
-// alert message when trying to overwrite
-// Check who won and show it
-// cheeck for draw
-// ensure users second turn doesn'nt overwrite
-// stop computer from playing if game is won
+// end the game when player wins, don't let computer play
+
+
+// Check if board has no empty spaces and input a draw in the else statement and start again
+// Remove the numbers in the game overs
