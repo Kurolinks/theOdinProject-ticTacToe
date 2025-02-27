@@ -15,6 +15,7 @@ const positionInput = document.querySelector("#position-input");
 const submit = document.querySelector("#submit");
 const winnerPara = document.querySelector(".winner");
 const boxes = document.querySelectorAll('.grid p');
+const restart = document.querySelector('.restart');
 
 // Checking for draw
 let gridCount;
@@ -23,6 +24,7 @@ let gridCount;
 xmarker.addEventListener('click', addX);
 omarker.addEventListener('click', addO);
 submit.addEventListener('click', submitPosition);
+restart.addEventListener('click', restartGame);
 
 let mChoice, cChoice;
 // Function to select X
@@ -166,6 +168,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 1 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -180,6 +183,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 2 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -194,6 +198,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 3 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -208,6 +213,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 4 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -222,6 +228,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 5 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -250,6 +257,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 7 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -264,6 +272,7 @@ function isGameWon() {
         }
         play = false;
         winnerPara.textContent = ("Game Over! 8 " + winner + " wins");
+        winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -272,6 +281,27 @@ function isGameWon() {
         // console.log("There is no Winner! Try again.");
         
     }
+}
+
+function restartGame() {
+    xmarker.style.display = "block";
+    omarker.style.display = "block";
+    positionDiv.style.display = "none";
+    winnerPara.style.display = "none";
+    topLeft.textContent = "";
+    topCenter.textContent = "";
+    topRight.textContent = "";
+    middleLeft.textContent = "";
+    middleCenter.textContent = "";
+    middleRight.textContent = "";
+    bottomLeft.textContent = "";
+    bottomCenter.textContent = "";
+    bottomRight.textContent = "";
+    hasPlayerWon = false;
+    hasComputerWon = false;
+    gridCount = 0;
+    mChoice = "";
+    cChoice = "";
 }
 
 
