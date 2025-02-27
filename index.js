@@ -17,19 +17,7 @@ const winnerPara = document.querySelector(".winner");
 const boxes = document.querySelectorAll('.grid p');
 
 // Checking for draw
-let occupiedCount;
-
-function checkForDraw() {
-    occupiedCount = 0; // Reset counter
-    boxes.forEach(box => {
-        if (box.textContent.trim() !== "") {
-            occupiedCount++;
-        }
-    });
-    if (occupiedCount === 8) {
-        alert("8 boxes are occupied.");
-    }
-};
+let gridCount;
 
 // Button Click functions
 xmarker.addEventListener('click', addX);
@@ -148,14 +136,21 @@ function computerPlay() {
         else if (compIndex === 9 && bottomRight.textContent === "" && !hasPlayerWon) {
             bottomRight.textContent = cChoice;
         }
-        
+        gridCount = 0; // Reset counter
+        boxes.forEach(box => {
+            if (box.textContent.trim() !== "") {
+                gridCount++;
+            }
+        });
+        if (gridCount === 8) {
+            positionDiv.style.display = "none";
+            winnerPara.textContent = ("Game Over! This is a Draw!");
+        }
 }
 
 // Make the game work with the UI
 // create an error message and make the user go again,stop computer from playing
 // stop computer from playing
-// Check draw condition
-// check if 8 spaces are occupied and declare result
 
 // Use objects
 
@@ -275,7 +270,7 @@ function isGameWon() {
     }
     else {
         // console.log("There is no Winner! Try again.");
-        checkForDraw();
+        
     }
 }
 
