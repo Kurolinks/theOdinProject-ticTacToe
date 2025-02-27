@@ -11,20 +11,55 @@
         <h1>TIC TAC TOE</h1>
         <H2>Select a Marker (X or O)</H2>
         <div class="grid">
-            <div class="top left"></div>
-            <div class="top center"></div>
-            <div class="top right"></div>
-            <div class="middle left"></div>
-            <div class="middle center"></div>
-            <div class="middle right"></div>
-            <div class="bottom left"></div>
-            <div class="bottom center"></div>
-            <div class="bottom rigth"></div>
+            <div class="top-left">
+                <span>1</span>
+                <p></p>
+            </div>
+            <div class="top-center">
+                <span>2</span>
+                <p></p>
+            </div>
+            <div class="top-right">
+                <span>3</span>
+                <p></p>
+            </div>
+            <div class="middle-left">
+                <span>4</span>
+                    <p></p>
+                </div>
+            <div class="middle-center">
+                <span>5</span>
+                <p></p>
+            </div>
+            <div class="middle-right">
+                <span>6</span>
+                <p></p>
+            </div>
+            <div class="bottom-left">
+                <span>7</span>
+                <p></p>
+            </div>
+            <div class="bottom-center">
+                <span>8</span>
+                <p></p>
+            </div>
+            <div class="bottom-right">
+                <span>9</span>
+                <p></p>
+            </div>
         </div>
         <div class="controls">
-            <button type="submit" class="xmarker">X</button>
-            <button type="submit" class="omarker">O</button>
+            <button type="submit" id="xmarker">X</button>
+            <button type="submit" id="omarker">O</button>
         </div>
+        <div class="position">
+            <fieldset>
+                <label for="position-input">Please Type a Position</label>
+                <input id="position-input" type="number">
+                <button id="submit">Submit</button>
+            </fieldset>
+        </div>
+        <p class="winner"></p>
 
     </div>
     <script src="index.js"></script>
