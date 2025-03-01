@@ -1,7 +1,7 @@
 # Tic Tac Toe
 
 
-This is a Tic Tac Toe game build in the process of completing (TOP) [The Odin Project] (https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
+This is a Tic Tac Toe game build in the process of completing (TOP) [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-tic-tac-toe)
 ## How to Play
 1. Players use markers X and O to play the game in 3x3 grid
 2. A player wins if he/she successfully pl places 3 horizontal, vertical or diagonal markers.
