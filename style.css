@@ -3,10 +3,58 @@
     margin: 0;
     padding: 0;
 }
+
+body {
+    background-color: rgb(219, 216, 214);
+}
 h1, h2 {
+    color: rgb(98, 98, 248);
     margin: auto;
     text-align: center;
     width: 50%;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu > div {
+    width: 40%;
+}
+
+.score {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 30%;
+}
+
+.player-score,
+.computer-score {
+    color: blue;
+    font-size: 22px;
+    margin-left: 1em;
+    margin-top: 10px;
+    width: 205px;
+}
+
+.playerscore,
+.compscore {
+    background-color: black;
+    border-radius: 15px;
+    color: white;
+    font-size: 22px;
+    height: 35px;
+    margin-top: 5px;
+    padding-left: 19px;
+    padding-top:5px;
+    width: 50px;
+}
+
+#error {
+    color: red;
+    font-size: 25px;
+    display: none;
+    margin-top: 30px;
 }
 
 .grid {
@@ -16,7 +64,7 @@ h1, h2 {
     grid-template-rows: 1fr 1fr 1fr;
     height: 250px;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 1%;
     width: 250px;
 }
 
@@ -34,9 +82,6 @@ h1, h2 {
     font-size: 20px;
 }
 
-.grid p {
-}
-
 .controls {
     margin-left: 20%;
     margin-top: 1rem;
@@ -51,7 +96,7 @@ h1, h2 {
     cursor: pointer;
     font-size: 30px;
     height: 50px;
-    margin-left: 8rem;
+    margin-left: 9.5rem;
     margin-top: 5px;
     width: 10rem;
 }
@@ -104,14 +149,19 @@ fieldset label {
     width: 15rem;
 }
 
-.restart {
+.restart, .next {
     background-color: rgb(22, 101, 113);
     border: 0;
     border-radius: 15px;
     color: white;
     cursor: pointer;
-    margin-left: 2rem;;
     font-size: 22px;
     height: 40px;
+    margin-left: 2rem;
+    margin-top: 1rem;
     width: 100px;
+}
+
+.next {
+    width: 150px;
 }

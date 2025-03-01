@@ -10,6 +10,21 @@
     <div class="container">
         <h1>TIC TAC TOE</h1>
         <H2>Select a Marker (X or O)</H2>
+        <div class="menu">
+            <div>
+                <div class="score">
+                    <p class="player-score">Player Score</p>
+                    <p class="playerscore"></p>
+                </div>
+                <div class="score">
+                    <p class="computer-score">Computer Score</p>
+                    <p class="compscore"></p>
+                </div>
+            </div>
+            <div id="error">
+                <p class="try-again">Occupied position, try Again!</p>
+            </div>
+        </div>
         <div class="grid">
             <div class="top-left">
                 <span>1</span>
@@ -25,7 +40,7 @@
             </div>
             <div class="middle-left">
                 <span>4</span>
-                    <p></p>
+                <p></p>
                 </div>
             <div class="middle-center">
                 <span>5</span>
@@ -61,8 +76,9 @@
         </div>
         <p class="winner"></p>
         <button class="restart">Restart</button>
-
+        <button class="next">Next Round</button>
     </div>
-    <script src="index.js"></script>
+    <!-- <script src="index.js"></script> -->
+    <script src="console.js"></script>
 </body>
 </html>

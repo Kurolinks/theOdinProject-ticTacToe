@@ -16,6 +16,10 @@ const submit = document.querySelector("#submit");
 const winnerPara = document.querySelector(".winner");
 const boxes = document.querySelectorAll('.grid p');
 const restart = document.querySelector('.restart');
+const next = document.querySelector('.next');
+const scoreForPlayer = document.querySelector(".playerscore");
+const scoreForComputer = document.querySelector(".compscore");
+const error = document.querySelector("#error");
 
 // Checking for draw
 let gridCount;
@@ -25,8 +29,15 @@ xmarker.addEventListener('click', addX);
 omarker.addEventListener('click', addO);
 submit.addEventListener('click', submitPosition);
 restart.addEventListener('click', restartGame);
+next.addEventListener('click', nextRound);
 
 let mChoice, cChoice;
+let playerScore = 0;
+let computerScore = 0;
+let winner;
+let hasPlayerWon = false;
+let hasComputerWon = false;
+
 // Function to select X
 function addX() {
     positionDiv.style.display = "block";
@@ -45,11 +56,9 @@ function addO() {
     cChoice = "x";
 }
 
-let hasPlayerWon = false;
-let hasComputerWon = false;
-
 // Function for the submit button 
 function submitPosition() {
+    error.style.display = "none";
     let position = parseInt(positionInput.value, 10);
     if (positionInput.value.trim() === '' || isNaN(position) || position < 1 || position > 9) {
         alert("Invalid input, try again!");
@@ -86,15 +95,22 @@ function submitPosition() {
             bottomRight.textContent = mChoice;
         }
         else {
-            alert("You picked an invalid position, try again!");
+            error.style.display = "block";
+            return;
         }
     }
     isGameWon();
     computerPlay();
     isGameWon();
+    if (winner === "You"){
+        playerScore += 1;
+    }
     positionInput.value = "";
+    scoreForPlayer.textContent = playerScore;
+    scoreForComputer.textContent = computerScore;
 }
 
+// Computer functionality
 function computerPlay() {
     let compIndex;
         do {
@@ -151,23 +167,25 @@ function computerPlay() {
 }
 
 // Make the game work with the UI
-// create an error message and make the user go again,stop computer from playing
-// stop computer from playing
 
 // Use objects
 
+// Check for win
 function isGameWon() {
-    let winner;
+    // let winner;
     // First Row
+    let state;
     if ((topLeft.textContent !== "") && (topLeft.textContent === topCenter.textContent) && (topCenter.textContent === topRight.textContent)) {
         if (topLeft.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 1 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -176,13 +194,15 @@ function isGameWon() {
     //  Second Row
     else if ((middleLeft.textContent !== "") && (middleLeft.textContent === middleCenter.textContent) && (middleCenter.textContent === middleRight.textContent)) {
         if (middleLeft.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 2 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -191,13 +211,15 @@ function isGameWon() {
     // Third Row
     else if ((bottomLeft.textContent !== "") &&(bottomLeft.textContent === bottomCenter.textContent) && (bottomCenter.textContent === bottomRight.textContent)) {
         if (bottomLeft.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 3 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -206,13 +228,15 @@ function isGameWon() {
     // First Column
     else if ((topLeft.textContent !== "") && (topLeft.textContent === middleLeft.textContent) && (middleLeft.textContent === bottomLeft.textContent)) {
         if (bottomLeft.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 4 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -221,13 +245,15 @@ function isGameWon() {
     // Second Column
     else if ((topCenter.textContent !== "") && (topCenter.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomCenter.textContent)) {
         if (topCenter.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 5 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -236,13 +262,15 @@ function isGameWon() {
     // Third Column
     else if ((topRight.textContent !== "") && (topRight.textContent === middleRight.textContent) && (middleRight.textContent === bottomRight.textContent)) {
         if (topRight.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 6 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         hasPlayerWon = true;
         hasComputerWon = true;
         positionDiv.style.display = "none";
@@ -250,13 +278,15 @@ function isGameWon() {
     // Left Diagonal
     else if ((topLeft.textContent !== "") && (topLeft.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomRight.textContent)) {
         if (topLeft.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 7 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -265,13 +295,15 @@ function isGameWon() {
     // Right Diagonal
     else if ((topRight.textContent !== "") &&(topRight.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomLeft.textContent)) {
         if (topRight.textContent === mChoice) {
-            winner = "Player";
+            winner = "You";
+            state = "Win";
         }
         else {
             winner = "Computer";
+            state = "Wins";
         }
         play = false;
-        winnerPara.textContent = ("Game Over! 8 " + winner + " wins");
+        winnerPara.textContent = ("Game Over! " + winner + " " + state);
         winnerPara.style.display = "block";
         hasPlayerWon = true;
         hasComputerWon = true;
@@ -283,9 +315,10 @@ function isGameWon() {
     }
 }
 
+// Restart game fucntion
 function restartGame() {
-    xmarker.style.display = "block";
-    omarker.style.display = "block";
+    xmarker.style.display = "inline";
+    omarker.style.display = "inline";
     positionDiv.style.display = "none";
     winnerPara.style.display = "none";
     topLeft.textContent = "";
@@ -302,6 +335,34 @@ function restartGame() {
     gridCount = 0;
     mChoice = "";
     cChoice = "";
+    winner = "";
+    playerScore = 0;
+    computerScore = 0;
+    scoreForPlayer.textContent = "";
+    scoreForComputer.textContent = "";
+}
+
+// Start a new round
+function nextRound() {
+    xmarker.style.display = "inline";
+    omarker.style.display = "inline";
+    positionDiv.style.display = "none";
+    winnerPara.style.display = "none";
+    topLeft.textContent = "";
+    topCenter.textContent = "";
+    topRight.textContent = "";
+    middleLeft.textContent = "";
+    middleCenter.textContent = "";
+    middleRight.textContent = "";
+    bottomLeft.textContent = "";
+    bottomCenter.textContent = "";
+    bottomRight.textContent = "";
+    hasPlayerWon = false;
+    hasComputerWon = false;
+    gridCount = 0;
+    mChoice = "";
+    cChoice = "";
+    winner = "";
 }
 
 
