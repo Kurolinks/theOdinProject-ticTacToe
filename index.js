@@ -166,10 +166,6 @@ function computerPlay() {
         }
 }
 
-// Make the game work with the UI
-
-// Use objects
-
 // Check for win
 function isGameWon() {
     // let winner;
