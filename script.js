@@ -59,267 +59,80 @@ function addO() {
 // Player Functionality
 function playerTurn() {
 
+    // Array for positions and event listeners
     const elements = [
-        { element: topLeft, handler: addmarker1 },
-        { element: topCenter, handler: addmarker2 },
-        { element: topRight, handler: addmarker3 },
-        { element: middleLeft, handler: addmarker4 },
-        { element: middleCenter, handler: addmarker5 },
-        { element: middleRight, handler: addmarker6 },
-        { element: bottomLeft, handler: addmarker7 },
-        { element: bottomCenter, handler: addmarker8 },
-        { element: bottomRight, handler: addmarker9 }
+        { element: topLeft, handler: addMarker },
+        { element: topCenter, handler: addMarker },
+        { element: topRight, handler: addMarker },
+        { element: middleLeft, handler: addMarker },
+        { element: middleCenter, handler: addMarker },
+        { element: middleRight, handler: addMarker },
+        { element: bottomLeft, handler: addMarker },
+        { element: bottomCenter, handler: addMarker },
+        { element: bottomRight, handler: addMarker }
     ];
     
     elements.forEach(({ element, handler }) => {
         element.addEventListener('click', handler);
     });
 
-    function addmarker1() {
-        if (topLeft.textContent === "") {   
-            if (oddorEven % 2 === 1) {
-                choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }         
-            topLeft.textContent = choice;
+    function addMarker(element) {
+        if (element.textContent === "") {
+            choice = (oddorEven % 2 === 1) ? firstChoice : secondChoice;
+            element.textContent = choice;
             oddorEven += 1;
             isGameWon();
-            // secondPlayerTurn();
         }
     }
-    function addmarker2() {
-        if (topCenter.textContent === "") {
-            if (oddorEven % 2 === 1) {
-                choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            topCenter.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker3() {
-        if (topRight.textContent === "") {
-            if (oddorEven % 2 === 1) {
-                choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            topRight.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker4() {
-        if (middleLeft.textContent === "") {
-            if (oddorEven % 2 === 1) {
-                choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            middleLeft.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker5() {
-       if (middleCenter.textContent === "") {
-            if (oddorEven % 2 === 1) {
-            choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            middleCenter.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker6() {
-       if (middleRight.textContent === "") {
-            if (oddorEven % 2 === 1) {
-            choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            middleRight.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker7() {
-       if (bottomLeft.textContent === "") {
-            if (oddorEven % 2 === 1) {
-            choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
+    
+    // Add event listeners using the addmarker function
+    topLeft.addEventListener('click', () => addMarker(topLeft));
+    topCenter.addEventListener('click', () => addMarker(topCenter));
+    topRight.addEventListener('click', () => addMarker(topRight));
+    middleLeft.addEventListener('click', () => addMarker(middleLeft));
+    middleCenter.addEventListener('click', () => addMarker(middleCenter));
+    middleRight.addEventListener('click', () => addMarker(middleRight));
+    bottomLeft.addEventListener('click', () => addMarker(bottomLeft));
+    bottomCenter.addEventListener('click', () => addMarker(bottomCenter));
+    bottomRight.addEventListener('click', () => addMarker(bottomRight));
 
-            bottomLeft.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker8() {
-       if (bottomCenter.textContent === "") {
-            if (oddorEven % 2 === 1) {
-            choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            bottomCenter.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
-    function addmarker9() {
-       if (bottomRight.textContent === "") {
-            if (oddorEven % 2 === 1) {
-            choice = firstChoice;
-            }
-            else {
-                choice = secondChoice;
-            }
-            bottomRight.textContent = choice;
-            oddorEven += 1;
-            isGameWon();
-            // secondPlayerTurn();
-        }
-    }
 }
 
 function isGameWon() {
-    // First Row
-    if ((topLeft.textContent !== "") && (topLeft.textContent === topCenter.textContent) && (topCenter.textContent === topRight.textContent)) {
-        if (topLeft.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
+
+    // Function to check if a winning condition is met
+function checkWin(cell1, cell2, cell3, firstChoice) {
+    if (cell1.textContent !== "" && cell1.textContent === cell2.textContent && cell2.textContent === cell3.textContent) {
+        winner = cell1.textContent === firstChoice ? "Player One" : "Player Two";
+        endGame(winner);
+        return true;
     }
-    //  Second Row
-    else if ((middleLeft.textContent !== "") && (middleLeft.textContent === middleCenter.textContent) && (middleCenter.textContent === middleRight.textContent)) {
-        if (middleLeft.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // Third Row
-    else if ((bottomLeft.textContent !== "") &&(bottomLeft.textContent === bottomCenter.textContent) && (bottomCenter.textContent === bottomRight.textContent)) {
-        if (bottomLeft.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // First Column
-    else if ((topLeft.textContent !== "") && (topLeft.textContent === middleLeft.textContent) && (middleLeft.textContent === bottomLeft.textContent)) {
-        if (bottomLeft.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // Second Column
-    else if ((topCenter.textContent !== "") && (topCenter.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomCenter.textContent)) {
-        if (topCenter.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // Third Column
-    else if ((topRight.textContent !== "") && (topRight.textContent === middleRight.textContent) && (middleRight.textContent === bottomRight.textContent)) {
-        if (topRight.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // Left Diagonal
-    else if ((topLeft.textContent !== "") && (topLeft.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomRight.textContent)) {
-        if (topLeft.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    // Right Diagonal
-    else if ((topRight.textContent !== "") && (topRight.textContent === middleCenter.textContent) && (middleCenter.textContent === bottomLeft.textContent)) {
-        if (topRight.textContent === firstChoice) {
-            winner = "Player One";
-        }
-        else {
-            winner = "Player Two";
-        }
-        play = false;
-        winnerPara.textContent = ("Game Over! " + winner + " wins");
-        winnerPara.style.display = "block";
-        hasPlayerOneWon = true;
-        positionDiv.style.display = "none";
-    }
-    else {
-        // console.log("There is no Winner! Try again.");
-        
-    }
+    return false;
+}
+
+// Function to end the game and display the winner
+function endGame(winner) {
+    play = false;
+    winnerPara.textContent = `Game Over! ${winner} wins`;
+    winnerPara.style.display = "block";
+    hasPlayerOneWon = winner === "Player One";
+    positionDiv.style.display = "none";
+}
+
+// Check all possible winning conditions
+if (
+    checkWin(topLeft, topCenter, topRight, firstChoice) || // First Row
+    checkWin(middleLeft, middleCenter, middleRight, firstChoice) || // Second Row
+    checkWin(bottomLeft, bottomCenter, bottomRight, firstChoice) || // Third Row
+    checkWin(topLeft, middleLeft, bottomLeft, firstChoice) || // First Column
+    checkWin(topCenter, middleCenter, bottomCenter, firstChoice) || // Second Column
+    checkWin(topRight, middleRight, bottomRight, firstChoice) || // Third Column
+    checkWin(topLeft, middleCenter, bottomRight, firstChoice) || // Left Diagonal
+    checkWin(topRight, middleCenter, bottomLeft, firstChoice) // Right Diagonal
+) {
+    // Game has been won, no further action needed
+}
+
     if (winner === "Player One") {
         firstPlayerScore += 1;
     }
