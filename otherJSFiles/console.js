@@ -4,6 +4,8 @@ let board = [];
 let counter = "-";
 let markerChoice = "-";
 let option;
+let drawCounter = 0;
+let formattedArray;
 
 for (let i = 0; i < 3; i++) {
 board[i] = [];
@@ -27,6 +29,7 @@ function playerTurn() {
     if ((markerChoice === "o")) {
         if (board[firstIndex][secondIndex] === "-") {
             board[firstIndex][secondIndex] = markerChoice;
+            drawCounter += 1;
         }
         else {
             alert("You can't place a marker here, Play Again!");
@@ -36,6 +39,7 @@ function playerTurn() {
     else if ((markerChoice === "x")) {
         if (board[firstIndex][secondIndex] === "-") {
             board[firstIndex][secondIndex] = markerChoice;
+            drawCounter += 1;
         }
         else {
             alert("You can't place a marker here, Play Again!");
@@ -63,6 +67,7 @@ function computerTurn() {
         }
 
         board[compFirstIndex][compSecondIndex] = computerChoice;
+        drawCounter += 1;
     }
 
     else if (markerChoice === "o") {
@@ -92,6 +97,7 @@ function winningCondition() {
         play = false;
         console.log("Game Over! 1 " + winner + " wins");
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[1][0] !== "-") && (board[1][0] === board[1][1]) && (board[1][1] === board[1][2])) {
         if (board[1][0] === markerChoice) {
@@ -103,6 +109,7 @@ function winningCondition() {
         play = false;
         console.log('Game Over! 2 ' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[2][0] !== "-") &&(board[2][0] === board[2][1]) && (board[2][1] === board[2][2])) {
         if (board[2][0] === markerChoice) {
@@ -114,6 +121,7 @@ function winningCondition() {
         play = false;
         console.log('Game Over! 3 ' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[0][0] !== "-") && (board[0][0] === board[1][0]) && (board[1][0] === board[2][0])) {
         if (board[0][0] === markerChoice) {
@@ -124,6 +132,7 @@ function winningCondition() {
         }
         play = false;
         console.log('Game Over! 4 ' + winner + ' wins');
+        alert('Game Over! ' + winner + ' wins');
     }
     else if ((board[0][1] !== "-") && (board[0][1] === board[1][1]) && (board[1][1] === board[2][1])) {
         if (board[0][1] === markerChoice) {
@@ -135,6 +144,7 @@ function winningCondition() {
         play = false;
         console.log('Game Over! 5 ' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[0][2] !== "-") &&(board[0][2] === board[1][2]) && (board[1][2] === board[2][2])) {
         if (board[0][2] === markerChoice) {
@@ -146,6 +156,7 @@ function winningCondition() {
         play = false;
         console.log('Game Over! 6' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[0][0] !== "-") && (board[0][0] === board[1][1]) && (board[1][1] === board[2][2])) {
         if (board[0][0] === markerChoice) {
@@ -157,6 +168,7 @@ function winningCondition() {
         play = false;
         console.log('Game Over! 7 ' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
     else if ((board[0][2] !== "-") &&(board[0][2] === board[1][1]) && (board[1][1] === board[2][0])) {
         if (board[0][2] === markerChoice) {
@@ -168,10 +180,12 @@ function winningCondition() {
         play = false;
         console.log('Game Over! ' + winner + ' wins');
         alert('Game Over! ' + winner + ' wins');
+        return;
     }
-    else {
-        // console.log("There is no Winner! Try again.");
+    else if((board[0][0] === "-") || (board[0][1] === "-") && (drawCounter === 8)){
+        alert("This is a Draw!");
     }
+    alert(drawCounter);
 }
 
 let play = true;
@@ -181,13 +195,17 @@ while(play) {
 }
 
 function playGame() {
-    playerTurn();
-    alert(board);
-    winningCondition();
-    computerTurn();
-    alert(board);
-    winningCondition();
-    console.log(board);
+    // while (drawCounter <= 8) {
+        playerTurn();
+        formattedArray = board.map(row => row.join(' ')).join('\n');
+        alert(formattedArray);
+        winningCondition();
+        computerTurn();
+        formattedArray = board.map(row => row.join(' ')).join('\n');
+        alert(formattedArray);
+        winningCondition();
+        console.log(board);
+    // }
 }
 
 // Todo list
