@@ -21,11 +21,15 @@ const scoreForPlayerOne = document.querySelector(".playerscore");
 const scoreForPlayerTwo = document.querySelector(".compscore");
 const error = document.querySelector("#error");
 const boxesDiv = document.querySelector('.grid');
+const playerOne = document.querySelector(".player-score");
+const playerTwo = document.querySelector(".computer-score");
 
 xmarker.addEventListener('click', addX);
 omarker.addEventListener('click', addO);
 restart.addEventListener('click', restartGame);
 next.addEventListener('click', nextRound);
+playerOne.addEventListener('click', changeNameOne);
+playerTwo.addEventListener('click', changeNameTwo);
 
 
 let play = true;
@@ -35,6 +39,21 @@ let secondPlayerScore = 0;
 let winner;
 let hasPlayerOneWon = false;
 let oddorEven = 1;
+let nameOfFirstPlayer = "Player One";
+let nameOfSecondPlayer = "Player Two";
+
+// Change Player name
+function changeNameOne () {
+    playerOne.style.cursor = "pointer";
+    nameOfFirstPlayer =  prompt("Type in your name: ");
+    playerOne.textContent = nameOfFirstPlayer;
+}
+
+function changeNameTwo () {
+    playerTwo.style.cursor = "pointer";
+    nameOfSecondPlayer =  prompt("Type in your name: ");
+    playerTwo.textContent = nameOfSecondPlayer;
+}
 
 // Function to slect X
 function addX() {
@@ -51,7 +70,7 @@ function addO() {
     xmarker.style.display = "none";
     omarker.style.display = "none";
     boxesDiv.style.cursor = "pointer";
-    firstChoice = "0";
+    firstChoice = "o";
     secondChoice = "x";
     playerTurn();
 }
@@ -103,7 +122,7 @@ function isGameWon() {
     // Function to check if a winning condition is met
 function checkWin(cell1, cell2, cell3, firstChoice) {
     if (cell1.textContent !== "" && cell1.textContent === cell2.textContent && cell2.textContent === cell3.textContent) {
-        winner = cell1.textContent === firstChoice ? "Player One" : "Player Two";
+        winner = cell1.textContent === firstChoice ? nameOfFirstPlayer : nameOfSecondPlayer;
         endGame(winner);
         return true;
     }
@@ -133,10 +152,10 @@ if (
     // Game has been won, no further action needed
 }
 
-    if (winner === "Player One") {
+    if ((winner === "Player One") || (winner === nameOfFirstPlayer)) {
         firstPlayerScore += 1;
     }
-    else if (winner === "Player Two") {
+    else if ((winner === "Player Two") || (winner === nameOfSecondPlayer)) {
         secondPlayerScore += 1;
     }
     winner = "";
@@ -184,6 +203,10 @@ function restartGame() {
     scoreForPlayerOne.textContent = "";
     scoreForPlayerTwo.textContent = "";
     oddorEven = 1;
+    nameOfFirstPlayer = "Player One";
+    nameOfSecondPlayer = "Player Two";
+    playerOne.textContent = "Player One Score";
+    playerTwo.textContent = "Player Two Score";
 }
 
 // Start a new round
